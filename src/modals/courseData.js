@@ -24,7 +24,11 @@ const CourseSchema = new Schema({
     internship_partner     : String,
     knowledge_partner      : String,
     index                  : Number,
-    samplequestion         :String,
+    samplequestion         : String,
+    startdate              : String,
+    enddate                : String,
+    lastdateregistration   : String,
+    dateofentrance         : String,
     active                 : Boolean 
 });    
 

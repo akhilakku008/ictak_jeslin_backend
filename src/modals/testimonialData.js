@@ -19,7 +19,8 @@ const TestimonialSchema = new Schema({
     image                : String,
     testimony             : String,
     name                    : String,
-    designation                : String
+    designation                : String,
+    coursename : String
 });
 
 var Testimonialdata = mongoose.model('CourseTestimony',TestimonialSchema);

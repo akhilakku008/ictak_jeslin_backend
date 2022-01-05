@@ -44,17 +44,20 @@ var upload = multer({
 
 app.get('/',async function (req, res) {
     
+console.log("chechking");
     try{
   await CourseData.find().sort({ index: 1 })
         .then(function (courses) {
             res.send(courses);
-            console.log(courses);
+         
         });
     }
     catch(err) {
         console.log("error response in coursedata"+err)
     }
 });
+
+
 
 
 //Single course route
@@ -66,7 +69,7 @@ app.get('/courseSingle/:id', async (req, res) => {
     console.log(req.body);
    await CourseData.findOne({ "_id": id })
         .then((course) => {
-            console.log("singlecourse"+course);
+
             res.send(course);
         });
     } catch (err) {

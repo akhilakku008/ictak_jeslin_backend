@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express.Router();
 const multer = require('multer');
-const TestimonyData = require('../modals/testimonialData')
+const TestimonyData = require('../modals/testimonialdata')
 var fs = require('fs');
 
 // Configure Storage for image upload using Multer
@@ -45,6 +45,14 @@ app.get('/', function (req, res) {
             res.send(testimonials);
         });
 });
+
+
+//Individual Testimonials
+app.post('/individual', function (req, res) {
+
+    console.log(req.body.c,"backend!!");
+    res.send(true);
+ });
 
 
 //Course testimony route

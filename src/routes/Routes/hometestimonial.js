@@ -1,11 +1,11 @@
 const express = require('express');
-const TestimonialData = require('../../modals/TestimonialData');
+const TestimonialData = require('../../modals/testimonialdata');
 let testimonialRouter = express.Router();
 
 testimonialRouter.get('/', function (req, res) {
     TestimonialData.find()
         .then(function (test1) {
-            console.log("TESTIMONIAL"+test1);
+          
             res.send(test1);
         })
 });

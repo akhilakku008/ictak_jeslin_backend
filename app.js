@@ -9,10 +9,11 @@ const jwt = require('jsonwebtoken');
 
 const port = process.env.PORT || 3000;
 
+
 app.use(express.urlencoded({ extended: true })); //middleware portion for adding data
 app.use(cors());
 app.use(express.json());
-app.use(express.static('./public'));
+app.use(express.static(__dirname + '/public'));
 app.use('/uploads', express.static('uploads'));
 
 
@@ -20,6 +21,7 @@ app.use('/uploads', express.static('uploads'));
 const hometestimonialRouter = require('./src/routes/Routes/hometestimonial');
 app.use('/api/hometestimonials',hometestimonialRouter)
 // Route for testimonial for home page ends here
+
 
 // Route for testimonial in home page starts here
 const staffRouter = require('./src/routes/Routes/staff');
@@ -73,7 +75,7 @@ const registration = require('./src/routes/courseRegistration'); //course regist
 app.use('/api/registration',registration);
 
 //Course testinomy route
-const testimony = require('./src/routes/courses')
+const testimony = require('./src/routes/courseTestimony');
 app.use('/api/CourseTestimony',testimony)
 
 
