@@ -24,4 +24,4 @@ const PartnershipApplicationSchema = new Schema({
 
 var NewPartnerApplicationData = mongoose.model('partnershipApplication', PartnershipApplicationSchema);
 
-module.exports = NewPartnerApplicationData;
+module.exports = NewPartnerApplicationData    ;
