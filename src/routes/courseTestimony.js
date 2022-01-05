@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express.Router();
 const multer = require('multer');
-const TestimonyData = require('../modals/testimonialdata')
+const TestimonyData = require('../modals/testimonialData')
 var fs = require('fs');
 
 // Configure Storage for image upload using Multer

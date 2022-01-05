@@ -23,7 +23,7 @@ const TestimonialSchema = new Schema({
     coursename : String
 });
 
-var testimonialdata = mongoose.model('CourseTestimony',TestimonialSchema);
+var testimonialData = mongoose.model('CourseTestimony',TestimonialSchema);
 
-module.exports = testimonialdata;
+module.exports = testimonialData;
 
