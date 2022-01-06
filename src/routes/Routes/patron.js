@@ -7,7 +7,6 @@ patronRouter.get('/', async function (req, res) {
     try { 
         await patronData.find()
         .then(function (patron) {
-            console.log(patron+"patrons");
             res.send(patron);
         })
     }

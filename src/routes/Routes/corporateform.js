@@ -38,4 +38,13 @@ try{
 
 });
 
+//corporate data call
+corporateformRouter.get('/data', async function (req, res) {
+    corporateApplicationData.find()
+   .then(function (events) {
+       res.send(events)
+   })
+
+});
+
 module.exports = corporateformRouter;

@@ -7,7 +7,6 @@ industrypartnerRouter.get('/', async function (req, res) {
    
          industrypartnerData.find()
         .then(function (industrypartners) {
-            console.log(industrypartners+"industry");
             res.send(industrypartners);
         })
   

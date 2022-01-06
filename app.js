@@ -3,6 +3,7 @@ const app =  express();
 
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+const bodyParser = require('body-parser');
 // const path = require('path');
 
 // app.use(express.static('./dist/FrontEnd'));
@@ -15,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname + '/public'));
 app.use('/uploads', express.static('uploads'));
-
+// app.use(bodyParser.json());
 
 // Route for testimonial in home page starts here
 const hometestimonialRouter = require('./src/routes/Routes/hometestimonial');

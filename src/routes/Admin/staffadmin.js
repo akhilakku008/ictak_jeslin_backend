@@ -30,6 +30,19 @@ const cpUpload = upload.fields([
 
 
 
+  //single staff
+  app.get('/staffdata/:id', async (req, res) => {
+    try{
+    const id = req.params.id;
+   await StaffData.findOne({ "_id": id })
+        .then((staff) => {
+            res.send(staff);
+        });
+    } catch (err) {
+        console.log("error response in Singlestaff"+err)
+    }
+})
+
 
 app.put('/updateIndex', (req, res) => {
 

@@ -7,7 +7,6 @@ knowledgepartnerRouter.get('/', async function (req, res) {
     try { 
         await knowledgepartnerData.find()
         .then(function (knowledgepartner) {
-            console.log(knowledgepartner+"knowledge");
             res.send(knowledgepartner);
         })
     }
