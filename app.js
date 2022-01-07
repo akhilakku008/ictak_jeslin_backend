@@ -64,6 +64,10 @@ const eventsRouter = require('./src/routes/Routes/events');
 app.use('/events',eventsRouter)
 // Route for events ends here
 
+//Event Registration
+const registrationevent = require('./src/routes/eventRegistration'); //event registration page
+app.use('/registrationevent',registrationevent);
+
 
 
 

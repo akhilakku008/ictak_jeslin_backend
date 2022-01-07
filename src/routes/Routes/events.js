@@ -2,6 +2,8 @@ const express = require('express');
 const eventsData = require('../../modals/eventsData');
 let eventsRouter = express.Router();
 
+
+        //get events
 eventsRouter.get('/', async function (req, res) {
     
    
@@ -13,6 +15,8 @@ eventsRouter.get('/', async function (req, res) {
   
 });
 
+
+//single event
 eventsRouter.get('/:id', async function (req, res) {
     
    

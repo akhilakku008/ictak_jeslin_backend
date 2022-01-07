@@ -1,10 +1,9 @@
 const express = require("express");
 const app = express.Router();
 const nodemailer = require('nodemailer');
-const RegisterCourse = require("../modals/courseRegistration");
+const EventRegistrationdata = require('../modals/eventRegistration');
 const {google}=require('googleapis');
 const { oauth2 } = require('googleapis/build/src/apis/oauth2')
-
 
 
 const CLIENT_ID='358879111934-lldho3noupbpkclh30g3iv06t8ri0m64.apps.googleusercontent.com'
@@ -15,6 +14,8 @@ const REFRESH_TOKEN='1//04YjoTW1pK31aCgYIARAAGAQSNwF-L9IrCq-LYDWmQMbF3mWMAiYDsnM
 const oAuth2Client=new google.auth.OAuth2(CLIENT_ID,CLIENT_SECRET,REDIRECT_URI)
 oAuth2Client.setCredentials({refresh_token:REFRESH_TOKEN})
 
+
+//send email to recepient
 async function sendEmail(data){
 
     try{
@@ -35,8 +36,8 @@ async function sendEmail(data){
           const mailOptions={
               from:'ICT Academy of Kerala <creationzv@gmail.com>',
               to: data.email,
-              subject:'Course Enrolled Successfully',
-              text:`You have been successfully enrolled to ${data.courseTitle}` 
+              subject:'Event Registered Successfully',
+              text:`You have been successfully enrolled to ${data.eventTitle}` 
 
           }
 
@@ -49,28 +50,20 @@ async function sendEmail(data){
 }
 
 
-
-
-
-//Course Registration form data recieving route
-
-app.post("/courseRegister", function (req, res) {
+//event registration
+app.post("/eventRegister", function (req, res) {
 
     let RegistrationItem = {
-      courseId: '',
-      courseTitle: req.body.ct,
-      name: req.body.c.name,
-      email: req.body.c.email,
-      phoneno: req.body.c.phoneno,
-      employeeStatus: '',
-      graduation: '',
-      comments: '',
-      courseAmount : req.body.cf,
+      eventId: '',
+      eventTitle: req.body.et,
+      name: req.body.e.name,
+      email: req.body.e.email,
+      phoneno: req.body.e.phoneno,
+      eventAmount: req.body.ef,
     };
     console.log(RegistrationItem);
-    var register = new RegisterCourse(RegistrationItem);
+    var register = new EventRegistrationdata(RegistrationItem);
     register.save().then((data)=>{
-      console.log(data)
       res.send(data);
       sendEmail(data).then((res)=>{
         console.log(res);    
@@ -124,25 +117,6 @@ app.post("/courseRegister", function (req, res) {
     // });
 
     //  
-
-
-
- 
             
         });
-
-//Course Registration data view || to admin
-app.get("/registercourseList", async function (req, res) {
-  try {
-    console.log("registercourseList");
-    await RegisterCourse.find()
-      .sort({ _id: -1 })
-      .then(function (cousrseRegs) {
-        res.send(cousrseRegs);
-      });
-  } catch (err) {
-    console.log("error response in registercourseList" + err);
-  }
-});
-
-module.exports = app;
+        module.exports = app;

@@ -12,14 +12,16 @@ const eventsSchema = new Schema({
     eventname: String,
     eventtype: String,
     eventabout: String,
-    eventagenda: String,
-    eventoverview: String,
     eventobjective:String,
+    eventoverview: String,
+    eventagenda: String,
     eventtraining: String,
     eventfees: String,
+    lastDateReg: String,
     startdate: String,       
     enddate: String,
     image:String,
+    eventRegFee: String,
 
   creation_date:Date
 });

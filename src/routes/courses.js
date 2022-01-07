@@ -46,7 +46,6 @@ app.get('/',async function (req, res) {
     try{
   await CourseData.find().sort({ index: 1 })
         .then(function (courses) {
-            console.log("inside await");
             res.send(courses);
         });
     }

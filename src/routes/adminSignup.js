@@ -71,7 +71,7 @@ app.post('/signup/update', async (req, res) => {
  await adminSignup.findByIdAndUpdate({ "_id": id }, updateUser)
     .then((respond) => {
       if (respond) {
-        console.log('Admin Credential succesfully updated')
+        console.log('Admin Credential succesfully updated');
         res.send(true)
       }
       else {
