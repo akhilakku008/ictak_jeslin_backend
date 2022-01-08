@@ -11,39 +11,36 @@ mongoose.connect(
 const Schema = mongoose.Schema;
 
 const CourseSchema = new Schema({
+
   courseTitle: String,
+  courseType: String, //to be added
   courseImage: String,
-  courseAbout: String,
-  courseOverview: String,
+  courseAbout: String,  // is same as LongDes
   courseAgenda: String,
-  courseTraining: String,
   courseFee: String,
   EntranceExamDate: String,
   lastDateReg: String,
   startDate: String,
   Objectives: String,
   courseRegFee: String,
-  courseDuration: String,  //tel aneesha
+  courseShortName: String,
+  courseDuration: String,  
 
   samplequestion: String,
   placementlist: String,
   samplecertificate: String,
-  internshipcertificate: String,
+  internshipcertificate: String, 
   shortDesc: String,
-  LongDes: String,
-  Reg_Status: Number,
+  LongDes: String, //ethu vechere kalayanda..v might use it somewhere
+
  
-  Rating: Number,
-  dates: String,
-  aptitude_test: String,
-  eligibility: String,
-  course_Agenda: String,
-  course_fee: String,
-  course_delivery: String,
-  internship_partner: String,
-  knowledge_partner: String,
-  index: Number,
-  active: Boolean,
+  
+
+  course_delivery: String, 
+  internship_partner: String,  
+  knowledge_partner: String, 
+  index: Number,  
+  active: Boolean,  
 });
 
 var Coursedata = mongoose.model("coursedata", CourseSchema);
