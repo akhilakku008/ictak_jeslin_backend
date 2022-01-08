@@ -83,6 +83,10 @@ app.use('/registration',registration);
 const testimony = require('./src/routes/courseTestimony');
 app.use('/CourseTestimony',testimony)
 
+//Contact Registration
+const contact = require('./src/routes/contactRegistration'); //contact reg
+app.use('/contact',contact);
+
 
 
 

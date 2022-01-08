@@ -12,33 +12,34 @@ const Schema = mongoose.Schema;
 
 const CourseSchema = new Schema({
 
-  courseTitle: String,
-  courseType: String, //to be added
+  courseTitle: String, 
+  courseType: String, 
   courseImage: String,
-  courseAbout: String,  // is same as LongDes
+  courseAbout: String,  
   courseAgenda: String,
   courseFee: String,
   EntranceExamDate: String,
   lastDateReg: String,
-  startDate: String,
+  commencementDate: String,  
+  orientationDate: String,
   Objectives: String,
-  courseRegFee: String,
-  courseShortName: String,
+  courseRegFee: String, //250
+  courseShortName: String, 
   courseDuration: String,  
 
-  samplequestion: String,
-  placementlist: String,
-  samplecertificate: String,
-  internshipcertificate: String, 
-  shortDesc: String,
-  LongDes: String, //ethu vechere kalayanda..v might use it somewhere
+  samplequestion: String,  
+  placementlist: String,  //same
+  samplecertificate: String,  //same
+  internshipcertificate: String,  //same
+  shortDesc: String, 
+  LongDes: String, //ethu vechere kalayanda..v might use it somewhere //kaly
 
  
   
 
-  course_delivery: String, 
-  internship_partner: String,  
-  knowledge_partner: String, 
+  course_delivery: String,  // static
+  internship_partner: String,  // static
+  knowledge_partner: String, // static
   index: Number,  
   active: Boolean,  
 });

@@ -51,7 +51,11 @@ app.get('/', function (req, res) {
 app.post('/individual', function (req, res) {
 
     console.log(req.body.c,"backend!!");
-    res.send(true);
+    TestimonyData.find({"coursename":req.body.c})
+    .then((data)=>{
+        console.log(data);
+        res.send(data);
+    })
  });
 
 

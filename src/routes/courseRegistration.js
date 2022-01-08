@@ -33,7 +33,7 @@ async function sendEmail(data){
         });
 
           const mailOptions={
-              from:'ICT Academy of Kerala <creationzv@gmail.com>',
+              from:'ICT Academy of Kerala <jeslinjaisan@gmail.com>',
               to: data.email,
               subject:'Course Enrolled Successfully',
               text:`You have been successfully enrolled to ${data.courseTitle}` 
@@ -144,5 +144,10 @@ app.get("/registercourseList", async function (req, res) {
     console.log("error response in registercourseList" + err);
   }
 });
+
+
+
+
+
 
 module.exports = app;
