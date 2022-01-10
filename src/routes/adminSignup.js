@@ -8,6 +8,8 @@ app.post('/', async function (req, res) {
   var User = {
     username: req.body.username,
     password: req.body.password,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
     email: req.body.email,
     add: req.body.add,
     delete: req.body.delete,
@@ -36,6 +38,19 @@ app.get('/AdminList', async function (req, res) {
     }
   });
   
+  //single admin
+  app.get('/admindata/:id', async (req, res) => {
+    try{
+    const id = req.params.id;
+   await adminSignup.findOne({ "_id": id })
+        .then((admin) => {
+            res.send(admin);
+        });
+    } catch (err) {
+        console.log("error response in Singleadmin"+err)
+    }
+})
+
 
 //Remove a admin from admin DB
 app.post('/signup/remove', async (req, res) => {
@@ -59,6 +74,8 @@ app.post('/signup/update', async (req, res) => {
   let item = {
     username: req.body.username,
     password: req.body.password,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
     email: req.body.email,
     add: req.body.add,
     delete: req.body.delete,
@@ -71,7 +88,7 @@ app.post('/signup/update', async (req, res) => {
  await adminSignup.findByIdAndUpdate({ "_id": id }, updateUser)
     .then((respond) => {
       if (respond) {
-        console.log('Admin Credential succesfully updated');
+        console.log('Admin Credential succesfully updated')
         res.send(true)
       }
       else {
@@ -80,6 +97,5 @@ app.post('/signup/update', async (req, res) => {
       }
     });
 });
-
 
 module.exports = app;

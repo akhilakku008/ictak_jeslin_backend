@@ -5,7 +5,6 @@ const fs = require('fs');
 
 /* multer start */
 const multer = require('multer');
-const res = require('express/lib/response');
 
 
 const storage = multer.diskStorage({

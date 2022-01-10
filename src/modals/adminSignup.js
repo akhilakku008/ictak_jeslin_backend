@@ -12,6 +12,8 @@ const admindataSchema = new Schema({
    
     username: String,
     password: String,
+    firstname: String,
+    lastname: String,
     email: String,
     add: Boolean,
     delete: Boolean,

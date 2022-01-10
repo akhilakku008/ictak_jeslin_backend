@@ -24,10 +24,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 const cpUpload = upload.fields([
-   { name: 'image', maxCount: 1 }
+   { name: 'file1', maxCount: 1 }
 ]);
 /* multer end */
-
 
 
   //single staff
@@ -42,6 +41,7 @@ const cpUpload = upload.fields([
         console.log("error response in Singlestaff"+err)
     }
 })
+
 
 
 app.put('/updateIndex', (req, res) => {
@@ -59,18 +59,19 @@ app.put('/updateIndex', (req, res) => {
 
 });
 
-app.post('/insert', function (req, res) {
-
+app.post('/insert',cpUpload, function (req, res) {
+     
+    console.log("new Staff",req.body)
     var staff = {
         name: req.body.name,
         designation: req.body.designation,
         about: req.body.about,
-        image: req.body.image,
+        image:  req.files?.file1[0].path,
 
     }
     var staffItem = new StaffData(staff);
     staffItem.save().then(function (data) {
-        res.send(true)
+        res.send(data)
     }).catch(function (error) {
         res.send(false)
     });
@@ -78,25 +79,27 @@ app.post('/insert', function (req, res) {
 });
 
 //deleting staff data
-app.delete('/remove/:id', (req, res) => {
+app.post('/remove', (req, res) => {
     console.log(req.body);
-    id = req.params.id
+    id = req.body._id
     console.log(` inside remove ${id}`);
-    StaffData.deleteOne({ '_id': id })
+    StaffData.findByIdAndDelete({ '_id': id })
         .then(function (staff) {
             console.log('success')
-            res.send(true);
+            res.send(staff);
         });
 
 });
+
+
 ///updating staff 
-app.put('/update', (req, res) => {
+app.post('/update',cpUpload,(req, res) => {
 
     var item = {
         name: req.body.name,
         designation: req.body.designation,
         about: req.body.about,
-        image:  req.files?.image[0].path 
+        image: req.files?.file1[0].path 
     }
 
     

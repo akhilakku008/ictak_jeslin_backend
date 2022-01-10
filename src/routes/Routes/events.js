@@ -3,7 +3,7 @@ const eventsData = require('../../modals/eventsData');
 let eventsRouter = express.Router();
 
 
-        //get events
+//get events
 eventsRouter.get('/', async function (req, res) {
     
    

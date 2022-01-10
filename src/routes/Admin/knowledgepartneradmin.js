@@ -59,5 +59,4 @@ catch{
  res.send(false);
 } 
 })
-
 module.exports = knowledgepartneradminRouter;

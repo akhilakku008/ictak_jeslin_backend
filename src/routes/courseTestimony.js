@@ -4,36 +4,24 @@ const multer = require('multer');
 const TestimonyData = require('../modals/testimonialData')
 var fs = require('fs');
 
-// Configure Storage for image upload using Multer
-var storage = multer.diskStorage({
-
-    // Setting directory on disk to save uploaded files
-    destination: function (req, file, cb) {
-        cb(null, './uploads/courseTestimony')
+//multer
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'uploads/');
     },
-
-    // Setting name of file saved
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + '.' + fileExtension(file.originalname))
+    filename: (req, file, cb) => {
+      cb(
+        null,
+        `${file.fieldname}-${+Date.now()}.${file.originalname.split('.')[1]}`
+      );
     }
-})
-
-var upload = multer({
-    storage: storage,
-    limits: {
-        // Setting Image Size Limit to 2MBs
-        fileSize: 2000000
-    },
-    fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-            //Error 
-            cb(new Error('Please upload JPG and PNG images only!'))
-        }
-        //Success 
-        cb(undefined, true)
-    }
-})
-
+  });
+  
+  const upload = multer({ storage: storage });
+  const cpUpload = upload.fields([
+     { name: 'file1', maxCount: 1 }
+  ]);
+  /* multer end */
 
 
 //Course testimonies ||to admin 
@@ -61,10 +49,13 @@ app.post('/individual', function (req, res) {
 
 //Course testimony route
 app.get('/courseTestimony/:id', async (req, res) => {
+    console.log("inside")
     try{
     const id = req.params.id;
-    await TestimonyData.find({ "course_id": id })
+    await TestimonyData.findOne({ "_id": id })
+   
         .then((testimonials) => {
+            console.log(testimonials._id);
             res.send(testimonials);
         });
     } catch (err) {
@@ -74,7 +65,7 @@ app.get('/courseTestimony/:id', async (req, res) => {
 
 //Add Testimony ||to admin
 
-app.post('/courseTestimony/add',upload.single('image'), async function (req, res) {
+app.post('/courseTestimony/add', cpUpload , async function (req, res) {
     var testimonial = {
 
         name: req.body.name,
@@ -82,15 +73,15 @@ app.post('/courseTestimony/add',upload.single('image'), async function (req, res
         organisation: req.body.organisation,
         testimony: req.body.testimony,
         courseTitle: req.body.courseTitle,
-        image: req.file.filename,
+        image: req.files?.file1[0].path,
     }
 
 
     var testimonial = new TestimonyData(testimonial);
     await testimonial.save().then(function (data) {
-        res.send(true)
+        res.send(data);
     }).catch(function (error) {
-        res.send(false)
+        res.send(false);
     });
 
 });
@@ -100,18 +91,18 @@ app.post('/courseTestimony/remove',async (req, res) => {
     console.log(req.body);
     id = req.body._id
     console.log(` inside deleted ${id}`);
-    const data = await TestimonyData.findByIdAndDelete({ '_id': id },
-    fs.unlink(data.image,(err => {
-            if (err) {
-                res.send(false)
-            } else {
-                res.send(true)
-            }
-        })));
+    TestimonyData.findByIdAndDelete({ '_id': id },
+    (err, result) => {
+        if (err) {
+            res.send(false)
+        } else {
+            res.send(true)
+        }
+    });
 });
 
 //Update/edit Testimony
-app.post('/testimonial/update',upload.single('image'), (req, res) => {
+app.post('/testimonial/update', cpUpload , (req, res) => {
 
     var item = {
         name: req.body.name,
@@ -119,7 +110,7 @@ app.post('/testimonial/update',upload.single('image'), (req, res) => {
         organisation: req.body.organisation,
         testimony: req.body.testimony,
         courseTitle: req.body.courseTitle,
-        image: req.file.filename
+        image: req.files?.file1[0].path
     }
 
     let _id = req.body._id;

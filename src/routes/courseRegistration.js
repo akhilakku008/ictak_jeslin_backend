@@ -123,7 +123,7 @@ app.post("/courseRegister", function (req, res) {
     
     // });
 
-    //  
+    
 
 
 
@@ -144,6 +144,38 @@ app.get("/registercourseList", async function (req, res) {
     console.log("error response in registercourseList" + err);
   }
 });
+
+//delete course registration data
+// app.post('/remove', async (req, res) => {
+//     console.log("vanneeeeeeeee");
+//     try{
+//    id = req.body._id;
+//    await RegisterCourse.findByIdAndDelete({"_id":id})
+//    .then((indus)=>{
+//        res.send(true);
+//    })  
+//   }
+//   catch{
+//    res.send(false);
+//   } 
+//   })
+
+  //Delete course route||to admin
+  app.post('/remove', async(req, res) => {
+    console.log(req.body);
+  id = req.body._id
+  console.log(` inside deleted ${id}`);
+  await RegisterCourse.findByIdAndDelete({ '_id': id },
+  (err, result) => {
+    if (err) {
+        res.send(false)
+    } else {
+        res.send(true)
+    }
+  });
+});
+
+  
 
 
 

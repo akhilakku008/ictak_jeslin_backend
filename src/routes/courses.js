@@ -8,35 +8,27 @@ const CourseData =  require('../modals/courseData')
 const CourseBrochure = require('../modals/courseBrochureData')
 
 
-// Configure Storage for image upload using Multer
-var storage = multer.diskStorage({
-
-    // Setting directory on disk to save uploaded files
-    destination: function (req, file, cb) {
-        cb(null, './uploads/courseImages')
+//multer
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, 'uploads/');
     },
-
-    // Setting name of file saved
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + '.' + fileExtension(file.originalname))
+    filename: (req, file, cb) => {
+      cb(
+        null,
+        `${file.fieldname}-${+Date.now()}.${file.originalname.split('.')[1]}`
+      );
     }
-})
-
-var upload = multer({
-    storage: storage,
-    limits: {
-        // Setting Image Size Limit to 2MBs
-        fileSize: 2000000
-    },
-    fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-            //Error 
-            cb(new Error('Please upload JPG and PNG images only!'))
-        }
-        //Success 
-        cb(undefined, true)
-    }
-})
+  });
+  
+  const upload = multer({ storage: storage });
+  const cpUpload = upload.fields([
+      { name: 'file', maxCount: 1 },
+      // { name: 'file2', maxCount: 1 },
+      // { name: 'file3', maxCount: 1 },
+      // { name: 'file4', maxCount: 1 }  
+  ]);
+  /* multer end */
 
 
 
@@ -79,93 +71,99 @@ app.get('/courseSingle/:id', async (req, res) => {
 
 
 //Add Course Route ||to admin
-app.post('/Course/add',upload.single('image'),async function (req, res) {
-
-    var indx;
-
-    await CourseData.findOne().sort('-index').exec(function (err, course) {
-        indx = course.index;
-        indx = indx + 1;
+app.post('/Course/add', cpUpload ,async function (req, res) {
+    console.log("not missed",req.body)
 
         var course = {
             courseTitle: req.body.courseTitle,
-            courseImage: req.file.filename,
-            shortDesc: req.body.shortDesc,
+            courseType: req.body.courseType,
+            courseShortName:req.body.courseShortName,
+            courseImage: req.files?.file[0].path,
+            courseAbout:req.body.courseAbout,
+            // shortDesc:  req.body.shortDesc,
+            category:  req.body.category,
             Reg_Status: req.body.Reg_Status,
-            Objectives: req.body.Objectives,
-            Rating: req.body.Rating,
+            // Objectives: req.body.Objectives,
+            EntranceExamDate: req.body.EntranceExamDate,
+            commencementDate:req.body.commencementDate,
+            orientationDate: req.body.orientationDate,
+            startDate: req.body.startDate,
+            courseRegFee: req.body.courseRegFee,
+            courseDuration: req.body.courseDuration,
+            samplequestion: req.body.samplequestion,
+            placementlist: req.body.placementlist,
+            internshipcertificate: req.body.internshipcertificate,
+            shortDesc: req.body.shortDesc,
             LongDes: req.body.LongDes,
             dates: req.body.dates,
-            eligibility: req.body.eligibility,
-            course_fee: req.body.course_fee,
-            entrance_details: req.body.entrance_details,
-            course_Agenda:req.body.course_Agenda,
-            aptitude_test: req.body.aptitude_test,
-            course_delivery: req.body.course_delivery,
-            internship_partner: req.body.internship_partner,
-            knowledge_partner: req.body.knowledge_partner,
-            index: indx,
+            courseFee: req.body.courseFee,
+            courseAgenda: req.body.courseAgenda,
             active: req.body.active
         }
 
         var courseItem = new CourseData(course);
         courseItem.save().then(function (data) {
-            res.send(true)
+            res.send(data)
         }).catch(function (error) {
             res.send(false)
 
         });
 
-        CourseData.findOne({ 'course_title': course.course_title }).select("_id").lean().then(result => {
-            if (result) {
-                CourseData.findByIdAndDelete(result).then(function (data) {
-                }).catch(function (error) {
-                });
-            }
-        });
-
     });
 
-});
 
 
 //Delete course route||to admin
 app.post('/Course/remove', async(req, res) => {
     console.log(req.body);
     id = req.body._id
-    console.log(` inside remove ${id}`);
-   const data =  await CourseData.findByIdAndDelete({ '_id': id },
-     fs.unlink(data.image,(err) => {
-            if (err) {
-                res.send(false)
-            } else {
-                res.send(true)
-            }
-}));
+console.log(` inside deleted ${id}`);
+CourseData.findByIdAndDelete({ '_id': id },
+(err, result) => {
+    if (err) {
+        res.send(false)
+    } else {
+        res.send(true)
+    }
 });
+});
+
+
+
+
 //Update course route ||to admin
-app.post('/Course/update',upload.single('image'), (req, res) => {
+app.post('/Course/update',cpUpload, (req, res) => {
 
     id = req.body._id;
     let item = {
         courseTitle: req.body.courseTitle,
-        courseImage: req.file.filename,
-        shortDesc: req.body.shortDesc,
-        Objectives: req.body.Objectives,
+        courseType: req.body.courseType,
+        courseShortName:req.body.courseShortName,
+        courseImage: req.files?.file[0].path,
+        courseAbout:req.body.courseAbout,
+        // shortDesc:  req.body.shortDesc,
+        category:  req.body.category,
         Reg_Status: req.body.Reg_Status,
-        Category: req.body.Category,
-        Rating: req.body.Rating,
+        // Objectives: req.body.Objectives,
+        EntranceExamDate: req.body.EntranceExamDate,
+        commencementDate:req.body.commencementDate,
+        orientationDate: req.body.orientationDate,
+        startDate: req.body.startDate,
+        courseRegFee: req.body.courseRegFee,
+        courseDuration: req.body.courseDuration,
+        samplequestion: req.body.samplequestion,
+        placementlist: req.body.placementlist,
+        internshipcertificate: req.body.internshipcertificate,
+        shortDesc: req.body.shortDesc,
         LongDes: req.body.LongDes,
         dates: req.body.dates,
-        eligibility: req.body.eligibility,
-        course_Agenda: req.body.course_Agenda,
-        aptitude_test: req.body.aptitude_test,
-        course_fee: req.body.course_fee,
-        entrance_details: req.body.entrance_details,
-        active: req.body.active,
-        startdate: req.body.startdate,
-        lastdateregistration: req.body.lastdateregistration,
-        dateofentrance: req.body.dateofentrance
+        courseFee: req.body.courseFee,
+        courseAgenda: req.body.courseAgenda,
+        // course_delivery: req.files?.file2[0].path,
+        // internship_partner: req.files?.file3[0].path,
+        // knowledge_partner: req.files?.file4[0].path,
+        // index: indx,
+        active: req.body.active
     
     }
 
