@@ -47,4 +47,19 @@ corporateformRouter.get('/data', async function (req, res) {
 
 });
 
+  //Delete academic route||to admin
+  corporateformRouter.post('/remove', async(req, res) => {
+    console.log(req.body);
+  id = req.body._id
+  console.log(` inside deleted ${id}`);
+  await corporateApplicationData.findByIdAndDelete({ '_id': id },
+  (err, result) => {
+    if (err) {
+        res.send(false)
+    } else {
+        res.send(true)
+    }
+  });
+  });
+
 module.exports = corporateformRouter;

@@ -36,7 +36,7 @@ const CourseSchema = new Schema({
 
  
   
-
+  Reg_Status: String, 
   course_delivery: String,  // static
   internship_partner: String,  // static
   knowledge_partner: String, // static

@@ -25,19 +25,22 @@ try{
 
 });
 
-academicadminRouter.delete('/remove/:id',async (req,res)=>{
-    try{
-   id = req.params.id;
-   await academicData.findById({"_id":id})
-   .then((indus)=>{
-        indus.remove()   
-       res.send(true);
-   })  
-  }
-  catch{
-   res.send(false);
-  } 
-  })
+
+
+   //Delete academic route||to admin
+   academicadminRouter.post('/remove', async(req, res) => {
+    console.log(req.body);
+  id = req.body._id
+  console.log(` inside deleted ${id}`);
+  await academicData.findByIdAndDelete({ '_id': id },
+  (err, result) => {
+    if (err) {
+        res.send(false)
+    } else {
+        res.send(true)
+    }
+  });
+  });
 
 
 module.exports = academicadminRouter;

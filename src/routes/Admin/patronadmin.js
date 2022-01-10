@@ -44,20 +44,21 @@ catch{
 }
 });
 
-patronadminRouter.delete('/remove/:id',async (req,res)=>{
-  try{
- id = req.params.id;
- await patronData.findById({"_id":id})
- .then((indus)=>{
-     console.log(indus.image);
-     fs.unlinkSync(indus.image);     
-     indus.remove()   
-     res.send(true);
- })  
-}
-catch{
- res.send(false);
-} 
-})
+
+
+ //Delete patron route||to admin
+ patronadminRouter.post('/remove', async(req, res) => {
+  console.log(req.body);
+id = req.body._id
+console.log(` inside deleted ${id}`);
+await patronData.findByIdAndDelete({ '_id': id },
+(err, result) => {
+  if (err) {
+      res.send(false)
+  } else {
+      res.send(true)
+  }
+});
+});
 
 module.exports = patronadminRouter;

@@ -7,7 +7,6 @@ var fs = require('fs');
 const CourseData =  require('../modals/courseData')
 const CourseBrochure = require('../modals/courseBrochureData')
 
-
 //multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -23,12 +22,8 @@ const storage = multer.diskStorage({
   
   const upload = multer({ storage: storage });
   const cpUpload = upload.fields([
-      { name: 'file', maxCount: 1 },
-      // { name: 'file2', maxCount: 1 },
-      // { name: 'file3', maxCount: 1 },
-      // { name: 'file4', maxCount: 1 }  
+     { name: 'image', maxCount: 1 }
   ]);
-  /* multer end */
 
 
 
@@ -78,7 +73,7 @@ app.post('/Course/add', cpUpload ,async function (req, res) {
             courseTitle: req.body.courseTitle,
             courseType: req.body.courseType,
             courseShortName:req.body.courseShortName,
-            courseImage: req.files?.file[0].path,
+            courseImage: req.files?.image[0].path,
             courseAbout:req.body.courseAbout,
             // shortDesc:  req.body.shortDesc,
             category:  req.body.category,
@@ -139,7 +134,7 @@ app.post('/Course/update',cpUpload, (req, res) => {
         courseTitle: req.body.courseTitle,
         courseType: req.body.courseType,
         courseShortName:req.body.courseShortName,
-        courseImage: req.files?.file[0].path,
+        courseImage: req.files?.image[0].path,
         courseAbout:req.body.courseAbout,
         // shortDesc:  req.body.shortDesc,
         category:  req.body.category,

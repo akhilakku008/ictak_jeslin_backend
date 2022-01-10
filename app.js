@@ -139,6 +139,11 @@ app.use('/industrypartneradmin', industrypartneradminRouter);
 // patrons admin adding patrons ends here 
 
 // patrons admin adding patrons starts here 
+const knowledgepadmin = require('./src/routes/Admin/knowledgepartneradmin');
+app.use('/knowledgeadmin', knowledgepadmin);
+// patrons admin adding patrons ends here 
+
+// patrons admin adding patrons starts here 
 const staffadminRouter = require('./src/routes/Admin/staffadmin');
 app.use('/staffadmin', staffadminRouter);
 // patrons admin adding patrons ends here 

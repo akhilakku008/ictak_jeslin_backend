@@ -29,4 +29,19 @@ console.log(req.body)
     }
 });
 
+  //Delete academic route||to admin
+  partnerformRouter.post('/remove',  (req, res) => {
+    console.log(req.body);
+  id = req.body._id
+  console.log(` inside deleted ${id}`);
+    partnerApplicationData.findOneAndDelete({ '_id': id },
+  (err, result) => {
+    if (err) {
+        res.send(false)
+    } else {
+        res.send(true)
+    }
+  });
+  });
+
 module.exports = partnerformRouter;

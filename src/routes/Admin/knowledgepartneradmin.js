@@ -44,19 +44,20 @@ catch{
 }
 });
 
-knowledgeadminRouter.delete('/remove/:id',async (req,res)=>{
-  try{
- id = req.params.id;
- await knowledgeData.findById({"_id":id})
- .then((indus)=>{
-     console.log(indus.image);
-     fs.unlinkSync(indus.image);     
-     indus.remove()   
-     res.send(true);
- })  
-}
-catch{
- res.send(false);
-} 
-})
+
+ //Delete knowledge route||to admin
+ knowledgepartneradminRouter.post('/remove', async(req, res) => {
+  console.log(req.body);
+id = req.body._id
+console.log(` inside deleted ${id}`);
+await knowledgepartnerData.findByIdAndDelete({ '_id': id },
+(err, result) => {
+  if (err) {
+      res.send(false)
+  } else {
+      res.send(true)
+  }
+});
+});
+
 module.exports = knowledgepartneradminRouter;

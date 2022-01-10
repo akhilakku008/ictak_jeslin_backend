@@ -15,4 +15,5 @@ knowledgepartnerRouter.get('/', async function (req, res) {
     }
 });
 
+
 module.exports = knowledgepartnerRouter;
