@@ -82,7 +82,7 @@ app.post('/Course/add', cpUpload ,async function (req, res) {
             EntranceExamDate: req.body.EntranceExamDate,
             commencementDate:req.body.commencementDate,
             orientationDate: req.body.orientationDate,
-            startDate: req.body.startDate,
+          
             courseRegFee: req.body.courseRegFee,
             courseDuration: req.body.courseDuration,
             samplequestion: req.body.samplequestion,
@@ -90,7 +90,7 @@ app.post('/Course/add', cpUpload ,async function (req, res) {
             internshipcertificate: req.body.internshipcertificate,
             shortDesc: req.body.shortDesc,
             LongDes: req.body.LongDes,
-            dates: req.body.dates,
+      
             courseFee: req.body.courseFee,
             courseAgenda: req.body.courseAgenda,
             active: req.body.active
