@@ -69,10 +69,10 @@ app.post('/courseTestimony/add', cpUpload , async function (req, res) {
     var testimonial = {
 
         name: req.body.name,
-        position: req.body.position,
+        // position: req.body.position,
         organisation: req.body.organisation,
         testimony: req.body.testimony,
-        courseTitle: req.body.courseTitle,
+        coursename: req.body.coursename,
         image: req.files?.file1[0].path,
     }
 
@@ -106,10 +106,10 @@ app.post('/testimonial/update', cpUpload , (req, res) => {
 
     var item = {
         name: req.body.name,
-        position: req.body.position,
+        // position: req.body.position,
         organisation: req.body.organisation,
         testimony: req.body.testimony,
-        courseTitle: req.body.courseTitle,
+        coursename: req.body.coursename,
         image: req.files?.file1[0].path
     }
 
