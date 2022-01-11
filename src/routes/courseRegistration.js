@@ -153,19 +153,20 @@ app.get("/registercourseList", async function (req, res) {
 //    await RegisterCourse.findByIdAndDelete({"_id":id})
 //    .then((indus)=>{
 //        res.send(true);
-//    })  
+//    })
 //   }
 //   catch{
 //    res.send(false);
-//   } 
+//   }
 //   })
+
 
   //Delete course route||to admin
   app.post('/remove', async(req, res) => {
     console.log(req.body);
   id = req.body._id
   console.log(` inside deleted ${id}`);
-  await RegisterCourse.findByIdAndDelete({ '_id': id },
+  await RegisterCourse.findOneAndDelete({ '_id': id },
   (err, result) => {
     if (err) {
         res.send(false)
