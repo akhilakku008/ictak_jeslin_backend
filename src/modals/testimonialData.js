@@ -21,10 +21,11 @@ const TestimonialSchema = new Schema({
 
   name: String,
   organisation: String,
-  position: String,
+  // position: String,
   testimony: String,
   image: String,
   coursename: String,
+  courseTitle:String
 
 });
 

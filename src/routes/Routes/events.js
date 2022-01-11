@@ -17,15 +17,29 @@ eventsRouter.get('/', async function (req, res) {
 
 
 //single event
-eventsRouter.get('/:id', async function (req, res) {
+// eventsRouter.get('single/:id', async function (req, res) {
     
    
-    eventsData.findById(req.params.id)
-   .then(function (events) {
+//     eventsData.findById(req.params.id)
+//    .then(function (events) {
     
-       res.send(events);
-   })
+//        res.send(events);
+//    })
 
-});
+// });
 
+
+eventsRouter.get('/single/:id', async (req, res) => {
+    try{
+    console.log("try");
+    const id = req.params.id;
+    console.log(req.body);
+   await eventsData.findOne({ "_id": id })
+        .then((event) => {
+            res.send(event);
+        });
+    } catch (err) {
+        console.log("error response in event "+ err)
+    }
+})
 module.exports = eventsRouter;
