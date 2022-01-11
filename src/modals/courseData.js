@@ -26,16 +26,13 @@ const CourseSchema = new Schema({
   courseRegFee: String, //250
   courseShortName: String, 
   courseDuration: String,  
-
+  courseCategory: String,
   samplequestion: String,  
   placementlist: String,  //same
   samplecertificate: String,  //same
   internshipcertificate: String,  //same
   shortDesc: String, 
   LongDes: String, //ethu vechere kalayanda..v might use it somewhere //kaly
-
- 
-  
   Reg_Status: String, 
   course_delivery: String,  // static
   internship_partner: String,  // static
