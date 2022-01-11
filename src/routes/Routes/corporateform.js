@@ -52,7 +52,7 @@ corporateformRouter.get('/data', async function (req, res) {
     console.log(req.body);
   id = req.body._id
   console.log(` inside deleted ${id}`);
-  await corporateApplicationData.findByIdAndDelete({ '_id': id },
+  await corporateApplicationData.findOneAndDelete({ '_id': id },
   (err, result) => {
     if (err) {
         res.send(false)

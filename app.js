@@ -159,6 +159,9 @@ const eventsadminRouter = require('./src/routes/Admin/eventsadmin');
 app.use('/eventsadmin', eventsadminRouter);
 // events admin adding events ends here
 
+//Admin todos Route
+const Todos = require('./src/routes/Admin/todoAdmin')
+app.use('/todo',Todos)
 
 
 // app.get('/*', function(req, res) {
