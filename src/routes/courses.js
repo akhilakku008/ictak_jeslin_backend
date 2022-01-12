@@ -83,6 +83,7 @@ app.post('/Course/add', cpUpload ,async function (req, res) {
             EntranceExamDate: req.body.EntranceExamDate,
             commencementDate:req.body.commencementDate,
             orientationDate: req.body.orientationDate,
+            lastDateReg: req.body.lastDateReg,
           
             courseRegFee: req.body.courseRegFee,
             courseDuration: req.body.courseDuration,
@@ -144,7 +145,8 @@ app.post('/Course/update',cpUpload, (req, res) => {
         EntranceExamDate: req.body.EntranceExamDate,
         commencementDate:req.body.commencementDate,
         orientationDate: req.body.orientationDate,
-        // startDate: req.body.startDate,
+        lastDateReg: req.body.lastDateReg,
+   
         courseRegFee: req.body.courseRegFee,
         courseDuration: req.body.courseDuration,
         samplequestion: req.body.samplequestion,
