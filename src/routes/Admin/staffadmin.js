@@ -66,7 +66,8 @@ app.post('/insert',cpUpload, function (req, res) {
         name: req.body.name,
         designation: req.body.designation,
         about: req.body.about,
-        image:  req.files?.file1[0].path,
+        image: req.files?.file1[0].path,
+        role: req.body.role
 
     }
     var staffItem = new StaffData(staff);
@@ -99,7 +100,8 @@ app.post('/update',cpUpload,(req, res) => {
         name: req.body.name,
         designation: req.body.designation,
         about: req.body.about,
-        image: req.files?.file1[0].path 
+        image: req.files?.file1[0].path,
+        role: req.body.role
     }
 
     
