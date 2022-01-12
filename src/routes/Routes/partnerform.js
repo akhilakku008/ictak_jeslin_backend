@@ -2,6 +2,26 @@ const express = require('express');
 const partnerApplicationData = require('../../modals/partnerformData');
 let partnerformRouter = express.Router();
 
+
+//Partner application list route 
+partnerformRouter.get('/partner',async function (req, res) {
+    try{
+  await partnerApplicationData.find().sort({ index: 1 })
+        .then(function (partner) {
+            res.send(partner);
+        });
+    }
+    catch(err) {
+        console.log("error response in coursedata"+err)
+    }
+});
+
+
+
+
+
+//Partner application add form route 
+
 partnerformRouter.post('/', async function (req, res) { 
 console.log(req.body)
     try{
@@ -29,7 +49,7 @@ console.log(req.body)
     }
 });
 
-  //Delete academic route||to admin
+  //Delete partner route||to admin
   partnerformRouter.post('/partner/remove', (req, res) => {
     console.log(req.body);
     id = req.body._id
